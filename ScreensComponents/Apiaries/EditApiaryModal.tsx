@@ -44,7 +44,6 @@ const AddApiaryModal: React.FC<MyComponentProps> = ({ visible, value, onClose, o
   };
 
   useEffect(() => {
-    console.log(value?.id)
     if(value != null){
         setApiary(value);
     }

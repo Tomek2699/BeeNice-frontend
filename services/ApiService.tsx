@@ -86,7 +86,13 @@ class ApiService {
       });
   
       return response;
-    } catch (error) {
+    } catch (error: any) {
+      if (error.response) {
+        const serverMessage = error.response.data?.message;
+        if (serverMessage === 'Token has expired') {
+          console.warn('Token has expired');
+        }
+      }
       console.error('API request failed:', error);
       throw error;
     }
