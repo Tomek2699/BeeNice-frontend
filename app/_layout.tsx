@@ -1,4 +1,4 @@
-import { SplashScreen, Stack, router } from "expo-router";
+import { SplashScreen, router, Stack } from "expo-router";
 import { useFonts } from 'expo-font';
 import { useEffect, useState } from "react";
 import { UserServiceInstance } from "../services/UserService";
@@ -61,8 +61,15 @@ export default function RootLayout() {
   return (
     <Stack>
       <Stack.Screen name="index" options={{headerShown: false}}/>
+      <Stack.Screen name="settings" options={{headerShown: false}}/>
       <Stack.Screen name="(auth)" options={{headerShown: false}}/>
-      <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
+      <Stack.Screen name="(apiaries)" options={{headerShown: false}}/>
+      <Stack.Screen name="(hives)" options={{headerShown: false}}/>
+      <Stack.Screen name="(hiveDashboard)" options={{headerShown: false}}/>
+      <Stack.Screen name="(mothers)" options={{headerShown: false}}/>
+      <Stack.Screen name="(families)" options={{headerShown: false}}/>
+      <Stack.Screen name="(harvests)" options={{headerShown: false}}/>
+      <Stack.Screen name="(treatments)" options={{headerShown: false}}/>
     </Stack>
   );
 }

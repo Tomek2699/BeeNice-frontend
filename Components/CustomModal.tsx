@@ -1,7 +1,7 @@
 import { Modal, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react'
 
-type MyComponentProps = {
+interface MyComponentProps  {
   visible: boolean;
   title: string;
   acceptButton: string;
@@ -10,7 +10,7 @@ type MyComponentProps = {
   onSubmit: () => void;
 };
 
-const CustomModal: React.FC<MyComponentProps> = ({ visible, title, acceptButton, inputs, onClose, onSubmit }) => {
+export default function CustomModal ({ visible, title, acceptButton, inputs, onClose, onSubmit }: MyComponentProps)  {
   return (
     <Modal visible={visible} animationType="fade" transparent={true}>
       <View className='flex-1 justify-center items-center bg-zinc-900/60'>
@@ -49,4 +49,3 @@ const CustomModal: React.FC<MyComponentProps> = ({ visible, title, acceptButton,
   );
 };
 
-export default CustomModal

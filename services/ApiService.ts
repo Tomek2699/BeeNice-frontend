@@ -71,7 +71,7 @@ class ApiService {
         router.replace('/sign-in')
       }
 
-      if (method === 'delete') {
+      if (method === 'get' || method === 'delete') {
         if (Array.isArray(data)) {
           url += data.map(item => `/${item}`).join('');
         } else if (data) {

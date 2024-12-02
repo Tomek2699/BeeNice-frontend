@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   // NOTE: Update this to include the paths to all of your component files.
-  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}", "./ScreensComponents/**/*.{js,jsx,ts,tsx}"],
+  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}", "./ScreensComponents/**/*.{js,jsx,ts,tsx}", ],
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
@@ -11,10 +11,11 @@ module.exports = {
         mainButtonBg: '#ea9d3e',
         fieldColor: '#FEE3A2',
         borderColor: '#312f17',
-        remove: '#bd8906',
-        edit: '#dea509',
+        remove: '#ab7c07',
+        edit: '#c99608',
         add: '#f5d018',
-        tile: '#ffc30b'
+        tile: '#ffc30b',
+        hiveBtn: '#e8ae0c',
       },
       fontFamily: {
         pthin: ["Poppins-Thin", "sans-serif"],

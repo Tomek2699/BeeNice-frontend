@@ -11,7 +11,7 @@ type MyComponentProps = {
   onSave: (apiary: Apiary) => void;
 };
 
-const AddApiaryModal: React.FC<MyComponentProps> = ({ visible, value, onClose, onSave }) => {
+const EditApiaryModal: React.FC<MyComponentProps> = ({ visible, value, onClose, onSave }) => {
   const initialApiaryState = { name: '', location: '' };
   const [apiary, setApiary] = useState({
     name: '',
@@ -77,4 +77,4 @@ const AddApiaryModal: React.FC<MyComponentProps> = ({ visible, value, onClose, o
   );
 };
 
-export default AddApiaryModal;
+export default EditApiaryModal;

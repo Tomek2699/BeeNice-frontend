@@ -1,4 +1,4 @@
-import { ApiServiceInstance, BaseResponse} from './ApiService';
+import { ApiServiceInstance } from './ApiService';
 import { Apiary } from '../DataModels/ApiaryModel';
 import { AxiosResponse } from 'axios';
 
@@ -42,7 +42,7 @@ class ApiaryService {
 
   async save (name: string, location: string) : Promise<ApiaryResponse> {
     try {
-      const response = await ApiServiceInstance.sendRequestWithAuth<Apiary>('post', '/ApiaryController/Save', { name : name, location : location});
+      const response = await ApiServiceInstance.sendRequestWithAuth<Apiary>('post', '/ApiaryController/Save', { name: name, location: location});
       const apiary: Apiary = {
         id: response.data.id,
         name: response.data.name,

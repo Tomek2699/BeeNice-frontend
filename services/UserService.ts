@@ -28,7 +28,7 @@ class UserService{
    
   async register (email: string, password: string, confirmPassword: string) : Promise<BaseResponse> {
     try {
-      const response = await ApiServiceInstance.sendRequest('post', '/Authorization/Register', { username : email, email : email, password : password, confirmPassword : confirmPassword });
+      const response = await ApiServiceInstance.sendRequest('post', '/Authorization/Register', { username: email, email: email, password: password, confirmPassword: confirmPassword });
       return response;
     } catch (error: any) {
       console.error('Błąd rejestracji:', error.response ? error.response.data : error.message);

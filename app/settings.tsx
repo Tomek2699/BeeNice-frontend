@@ -1,9 +1,10 @@
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import Icons from '../../constants/Icons'
-import { UserServiceInstance } from "../../services/UserService";
+import Icons from '../constants/Icons'
+import { UserServiceInstance } from "../services/UserService";
 import { router } from 'expo-router';
+import CustomPageHeader from '../Components/CustomPageHeader'
 
 const Settings = () => {
   const handleLogout = () => {
@@ -14,14 +15,11 @@ const Settings = () => {
   return (
     <SafeAreaView className='bg-primaryBg h-full'>
       <ScrollView>
-      <View className='items-center pt-2'>
-          <Image source={Icons.settings}
-            resizeMode='contain'
-            className='w-[170px] h-[50px]'/>
-          <Text className='text-4xl text-black font-pextrabold p-2'>
-            Opcje
-          </Text>
-        </View>
+        <CustomPageHeader
+                title="Opcje"
+                pageIcon={Icons.settings}
+                visibleSettings={false}
+        />
 
         <View className="flex-row justify-center p-10">
           <TouchableOpacity className="flex-row justify-center items-center bg-mainButtonBg rounded-xl p-3"

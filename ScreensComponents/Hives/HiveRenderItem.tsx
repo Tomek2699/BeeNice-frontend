@@ -1,44 +1,44 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { Apiary } from '../../DataModels/ApiaryModel';
+import { Hive } from '../../DataModels/HiveModel';
 import Icons from '../../constants/Icons';
 
-interface RenderApiaryProps {
-  item: Apiary;
-  expandedApiary: number | null;
-  setExpandedApiary: (id: number | null) => void;
-  handleOnPressEditApiary: (apiary: Apiary) => void;
+interface RenderHiveProps {
+  item: Hive;
+  expandedHive: number | null;
+  setExpandedHive: (id: number | null) => void;
+  handleOnPressEditHive: (hive: Hive) => void;
   handleDelete: (id: number) => void;
-  handleOpenHives: (id: number) => void;
+  handleOpenDashboard: (hive: Hive) => void;
 }
 
-const ApiaryRenderItem: React.FC<RenderApiaryProps> = ({
+const HiveRenderItem: React.FC<RenderHiveProps> = ({
   item,
-  expandedApiary,
-  setExpandedApiary,
-  handleOnPressEditApiary,
+  expandedHive,
+  setExpandedHive,
+  handleOnPressEditHive,
   handleDelete,
-  handleOpenHives,
+  handleOpenDashboard,
 }) => {
 
   return (
     <TouchableOpacity
       className={`border-2 rounded-2xl p-4 bg-tile ${
-        expandedApiary === item.id ? 'h-auto' : 'h-20'
+        expandedHive === item.id ? 'h-auto' : 'h-20'
       } mb-4`}
-      onPress={() => setExpandedApiary(expandedApiary === item.id ? null : item.id)}
+      onPress={() => setExpandedHive(expandedHive === item.id ? null : item.id)}
     >
-      {expandedApiary === item.id ? (
+      {expandedHive === item.id ? (
         <View>
           <Text className="font-pbold font-bold text-2xl mb-1" numberOfLines={1}>
-            {item.name}
+            {item.hiveNumber}
           </Text>
           <View className="flex-row justify-between">
             <Text className="font-pmedium font-bold text-xl" numberOfLines={1}>
-              {item.location}
+              {item.type}
             </Text>
             <Text className="font-pmedium font-bold text-xl" numberOfLines={1}>
-              {item.creationDate.toLocaleDateString('pl-PL')}
+              {item.state}
             </Text>
           </View>
 
@@ -47,14 +47,14 @@ const ApiaryRenderItem: React.FC<RenderApiaryProps> = ({
           <View className="flex-row justify-between">
           <TouchableOpacity
               className="flex-row justify-center bg-hiveBtn w-[33%] rounded-xl p-3"
-              onPress={() => handleOpenHives(item.id)}
+              onPress={() => handleOpenDashboard(item)}
             >
-              <Text className="font-pmedium text-xm mr-3">Ule</Text>
-              <Image source={Icons.hive} className="w-6 h-6" resizeMode="contain" />
+              <Text className="font-pmedium text-xm mr-3">Więcej</Text>
+              <Image source={Icons.rightArrow} className="w-6 h-6" resizeMode="contain" />
             </TouchableOpacity>
             <TouchableOpacity
               className="flex-row justify-center bg-edit w-[33%] rounded-xl p-3"
-              onPress={() => handleOnPressEditApiary(item)}
+              onPress={() => handleOnPressEditHive(item)}
             >
               <Text className="font-pmedium text-xm mr-3">Edytuj</Text>
               <Image source={Icons.edit} className="w-6 h-6" resizeMode="contain" />
@@ -71,12 +71,12 @@ const ApiaryRenderItem: React.FC<RenderApiaryProps> = ({
       ) : (
         <View className="flex-row justify-between items-center">
           <Text className="font-psemibold text-xl" numberOfLines={1}>
-            {item.name}
+            {item.hiveNumber}
           </Text>
           <View className="flex-row">
             <TouchableOpacity
               className="bg-edit rounded-xl p-3 mr-2"
-              onPress={() => handleOnPressEditApiary(item)}
+              onPress={() => handleOnPressEditHive(item)}
             >
               <Image source={Icons.edit} className="w-6 h-6" resizeMode="contain" />
             </TouchableOpacity>
@@ -93,4 +93,4 @@ const ApiaryRenderItem: React.FC<RenderApiaryProps> = ({
   );
 };
 
-export default ApiaryRenderItem;
+export default HiveRenderItem;
