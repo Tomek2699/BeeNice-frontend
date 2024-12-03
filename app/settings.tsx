@@ -19,6 +19,7 @@ const Settings = () => {
                 title="Opcje"
                 pageIcon={Icons.settings}
                 visibleSettings={false}
+                visibleSearch={false}
         />
 
         <View className="flex-row justify-center p-10">

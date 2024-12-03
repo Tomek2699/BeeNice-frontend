@@ -51,6 +51,7 @@ export default function dashboard () {
         <CustomPageHeader
                 title={`Panel ula - ${hive?.hiveNumber}`}
                 pageIcon={Icons.dashboard}
+                visibleSearch={false}
         />
 
         <View className='flex-row flex-wrap justify-between p-4'>

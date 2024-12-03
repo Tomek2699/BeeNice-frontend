@@ -27,7 +27,7 @@ const TabsLayout = () => {
               focused={focused}
               name="Apiaries"
             />
-          )
+          ),
         }}
       />
     </Tabs>

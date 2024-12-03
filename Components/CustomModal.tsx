@@ -1,4 +1,4 @@
-import { Modal, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Modal, View, Text, TextInput, TouchableOpacity, Keyboard } from 'react-native';
 import React from 'react'
 
 interface MyComponentProps  {
@@ -11,6 +11,10 @@ interface MyComponentProps  {
 };
 
 export default function CustomModal ({ visible, title, acceptButton, inputs, onClose, onSubmit }: MyComponentProps)  {
+  const handleSubmit = () => {
+    Keyboard.dismiss();
+  };
+  
   return (
     <Modal visible={visible} animationType="fade" transparent={true}>
       <View className='flex-1 justify-center items-center bg-zinc-900/60'>
@@ -27,6 +31,7 @@ export default function CustomModal ({ visible, title, acceptButton, inputs, onC
                 placeholder={input.placeholder}
                 value={input.value}
                 onChangeText={input.onChange}
+                onSubmitEditing={handleSubmit}
               />
             </View>
           ))}

@@ -23,7 +23,7 @@ const FormFieldAuth = ({ title, value, placeholder, handleChangeText, otherStyle
             className='flex-1 text-black font-psemibold text-base'
             value={value}
             placeholder={placeholder}
-            placeholderTextColor='#312f17'
+            placeholderTextColor='black'
             onChangeText={handleChangeText}
             secureTextEntry={ (title === 'Hasło' || title === 'Powtórz hasło') && !showPassword}
         />
