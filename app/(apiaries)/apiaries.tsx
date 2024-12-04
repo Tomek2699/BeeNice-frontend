@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Alert, Image, Animated, LayoutAnimation } from 'react-native';
+import { View, Text, TouchableOpacity, Animated, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AddApiaryModal from '../../ScreensComponents/Apiaries/AddApiaryModal'
 import EditApiaryModal from '@/ScreensComponents/Apiaries/EditApiaryModal';
@@ -6,18 +6,18 @@ import ApiaryRenderItem from '../../ScreensComponents/Apiaries/ApiaryRenderItem'
 import Icons from '@/constants/Icons';
 import LoadingScreen from '@/Components/LoadingScreen';
 import CustomPageHeader from '../../Components/CustomPageHeader'
-import { useApiaries } from '@/hooks/Apiaries/useApiaries';
+import { useData } from '@/hooks/Apiaries/useData';
 import { useSearch } from '@/hooks/Apiaries/useSearch';
 import { useCrud } from '@/hooks/Apiaries/useCrud';
 import { useScreenActions } from '@/hooks/Apiaries/useScreenActions';
 import { useRouting } from '@/hooks/Apiaries/useRouting';
 
 const Apiaries = () => {
-  const { apiaries, filteredApiaries, setApiaries, setFilteredApiaries, isLoading } = useApiaries();
+  const { apiaries, filteredApiaries, setApiaries, setFilteredApiaries, isLoading } = useData();
   const { handleSearch } = useSearch({apiaries, setFilteredApiaries});
-  const { handleAddApiary, handleEditApiary, handleDelete } = useCrud({setApiaries});
-  const { expandedApiary, selectedApiary, addApiaryModalVisible, editApiaryModalVisible, setExpandedApiary, openAddModal, closeAddApairyModal, 
-    openEditModal, closeEditApairyModal } = useScreenActions({apiaries})
+  const { handleAddApiary, handleEditApiary, handleDeleteApiary } = useCrud({setApiaries});
+  const { expandedApiary, selectedApiary, addApiaryModalVisible, editApiaryModalVisible, setExpandedApiary, openAddApiaryModal, closeAddApiaryModal, 
+    openEditApiaryModal, closeEditApiaryModal } = useScreenActions({apiaries})
   const { handleOpenHives } = useRouting();
 
   if (isLoading) {
@@ -34,10 +34,11 @@ const Apiaries = () => {
       />
       <View className="self-center mb-4">
         <TouchableOpacity
-          className="self-center bg-mainButtonBg border-2 rounded-2xl p-4"
-          onPress={openAddModal}
+          className="flex-row justify-center self-center bg-mainButtonBg border-2 rounded-2xl p-4"
+          onPress={openAddApiaryModal}
         >
-          <Text className="font-pbold">Dodaj pasiekę</Text>
+          <Text className="font-pbold mr-3">Dodaj pasiekę</Text>
+          <Image source={Icons.add} className="w-6 h-6" resizeMode="contain" />
         </TouchableOpacity>
       </View>
       <Animated.FlatList
@@ -48,8 +49,8 @@ const Apiaries = () => {
             item={item}
             expandedApiary={expandedApiary}
             setExpandedApiary={setExpandedApiary}
-            handleOnPressEditApiary={openEditModal}
-            handleDelete={handleDelete}
+            handleOnPressEditApiary={openEditApiaryModal}
+            handleDelete={handleDeleteApiary}
             handleOpenHives={() => handleOpenHives(item.id)}
           />
         )}
@@ -57,13 +58,13 @@ const Apiaries = () => {
       />
       <AddApiaryModal
         visible={addApiaryModalVisible}
-        onClose={closeAddApairyModal}
+        onClose={closeAddApiaryModal}
         onSave={handleAddApiary}
       />
       <EditApiaryModal
         visible={editApiaryModalVisible}
         value={selectedApiary}
-        onClose={closeEditApairyModal}
+        onClose={closeEditApiaryModal}
         onSave={handleEditApiary}
       />
     </SafeAreaView>

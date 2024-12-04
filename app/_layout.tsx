@@ -66,9 +66,9 @@ export default function RootLayout() {
       <Stack.Screen name="(apiaries)" options={{headerShown: false}}/>
       <Stack.Screen name="(hives)" options={{headerShown: false}}/>
       <Stack.Screen name="(hiveDashboard)" options={{headerShown: false}}/>
-      <Stack.Screen name="(mothers)" options={{headerShown: false}}/>
+      <Stack.Screen name="(queens)" options={{headerShown: false}}/>
       <Stack.Screen name="(families)" options={{headerShown: false}}/>
-      <Stack.Screen name="(harvests)" options={{headerShown: false}}/>
+      <Stack.Screen name="(honeyCollection)" options={{headerShown: false}}/>
       <Stack.Screen name="(treatments)" options={{headerShown: false}}/>
     </Stack>
   );

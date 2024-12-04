@@ -16,7 +16,7 @@ const HarvestsLayout = () => {
       }}
     >
       <Tabs.Screen
-        name="harvests"
+        name="honeyCollection"
         options={{
           title: 'Zbiory',
           headerShown: false,

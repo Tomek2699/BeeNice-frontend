@@ -1,25 +1,26 @@
 import { Dispatch, SetStateAction } from 'react';
-import { Apiary } from '@/DataModels/ApiaryModel';
+import { Hive } from '@/DataModels/HiveModel';
 import { Alert, LayoutAnimation  } from 'react-native';
-import ApiaryService from '@/services/ApiaryService';
+import HiveService from '@/services/HiveService';
 
-interface Props {
-    setApiaries: Dispatch<SetStateAction<Apiary[]>>;
+export interface Props {
+    setHives: Dispatch<SetStateAction<Hive[]>>;
 }
 
-export const useCrud = ({ setApiaries } : Props) => {
-  const handleAddApiary = (apiary: Apiary) => {
+export const useCrud = ({ setHives } : Props) => {
+
+  const handleAddHive = (hive: Hive) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setApiaries((prevApiaries) => [...prevApiaries, apiary]);
+    setHives((prevHives) => [...prevHives, hive]);
   };
 
-  const handleEditApiary = (apiary: Apiary) => {
-    setApiaries((prevApiaries) => 
-      prevApiaries.map(item => item.id === apiary.id ? apiary : item)
+  const handleEditHive = (hive: Hive) => {
+    setHives((prevHives) => 
+      prevHives.map(item => item.id === hive.id ? hive : item)
     );
   };
 
-  const handleDeleteApiary = async (id: number) => {
+  const handleDeleteHive = async (id: number) => {
     Alert.alert(
       'Usuń element',
       'Czy na pewno chcesz usunąć ten element?',
@@ -30,10 +31,10 @@ export const useCrud = ({ setApiaries } : Props) => {
           style: 'destructive',
           onPress: async () => {
             try {
-              const response = await ApiaryService.delete(id);
+              const response = await HiveService.delete(id);
               if (response.status === 200) {
                 LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-                setApiaries((prevApiaries) => prevApiaries.filter((item) => item.id !== id));
+                setHives((hives) => hives.filter((item) => item.id !== id));
               } else {
                 Alert.alert('Błąd', 'Nie udało się usunąć elementu. Spróbuj ponownie.');
               }
@@ -43,13 +44,13 @@ export const useCrud = ({ setApiaries } : Props) => {
             }
           },
         },
-      ]
+      ],
     );
-  };
+  }
 
   return {
-    handleAddApiary,
-    handleEditApiary,
-    handleDeleteApiary,
+    handleAddHive,
+    handleEditHive,
+    handleDeleteHive,
   };
 };

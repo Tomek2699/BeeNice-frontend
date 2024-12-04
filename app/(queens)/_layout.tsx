@@ -3,7 +3,7 @@ import Icons from '../../constants/Icons'
 import CustomTabIcon from '@/Components/CustomTabIcon';
 import { Tabs } from 'expo-router'
 
-const MothersLayout = () => {
+const QueensLayout = () => {
   return (
     <Tabs
       screenOptions={{
@@ -16,7 +16,7 @@ const MothersLayout = () => {
       }}
     >
       <Tabs.Screen
-        name="mothers"
+        name="queens"
         options={{
           title: 'Matki',
           headerShown: false,
@@ -34,4 +34,4 @@ const MothersLayout = () => {
   )
 }
 
-export default MothersLayout
+export default QueensLayout

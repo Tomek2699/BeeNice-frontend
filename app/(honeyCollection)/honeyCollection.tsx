@@ -1,14 +1,14 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Animated } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
 import React from 'react'
 import CustomPageHeader from '@/Components/CustomPageHeader'
 import Icons from '@/constants/Icons'
 
-const mothers = () => {
+const HoneyCollection = () => {
   return (
     <SafeAreaView className="bg-primaryBg h-full">
       <CustomPageHeader
-              title="Matki"
-              pageIcon={Icons.mother}
+              title="Zbiory"
+              pageIcon={Icons.harvest}
       />
       {/* <View className="items-center mb-4">
         <TouchableOpacity
@@ -49,4 +49,4 @@ const mothers = () => {
   )
 }
 
-export default mothers
+export default HoneyCollection

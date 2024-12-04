@@ -29,6 +29,7 @@ export default function CustomModal ({ visible, title, acceptButton, inputs, onC
               <TextInput
                 className='w-full h-16 px-4 bg-fieldColor border-2 rounded-2xl items-center flex-row'
                 placeholder={input.placeholder}
+                placeholderTextColor='black'
                 value={input.value}
                 onChangeText={input.onChange}
                 onSubmitEditing={handleSubmit}

@@ -2,7 +2,7 @@ import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import SearchHelper from '@/helpers/searchHelper';
 import { Apiary } from '@/DataModels/ApiaryModel';
 
-export interface Props {
+interface Props {
     apiaries: Apiary[];
     setFilteredApiaries: Dispatch<SetStateAction<Apiary[]>>;
 }

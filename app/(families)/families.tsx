@@ -3,7 +3,7 @@ import React from 'react'
 import CustomPageHeader from '@/Components/CustomPageHeader'
 import Icons from '@/constants/Icons'
 
-const families = () => {
+const Families = () => {
   return (
     <SafeAreaView className="bg-primaryBg h-full">
       <CustomPageHeader
@@ -49,4 +49,4 @@ const families = () => {
   )
 }
 
-export default families
+export default Families

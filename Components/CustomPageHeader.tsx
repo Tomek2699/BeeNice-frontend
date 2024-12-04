@@ -85,7 +85,7 @@ export default function CustomPageHeader ({ title, pageIcon, visibleSettings = t
               onChangeText={handleSearch}
             />
             <TouchableOpacity onPress={() => handleSearch("")}>
-                  <Image source={Icons.remove}
+                  <Image source={Icons.clear}
                       className='w-6 h-6'
                       resizeMode='contain'
                   />

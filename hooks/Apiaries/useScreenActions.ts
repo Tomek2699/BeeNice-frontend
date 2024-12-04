@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Apiary } from '@/DataModels/ApiaryModel';
 
-export interface Props {
+interface Props {
     apiaries: Apiary[];
 }
 
@@ -11,22 +11,32 @@ export const useScreenActions = ({ apiaries } : Props) => {
   const [editApiaryModalVisible, setEditApiaryModalVisible] = useState(false);
   const [selectedApiary, setSelectedApiary] = useState<Apiary | null>(null);
 
-  const openAddModal = () => {
+  const openAddApiaryModal = () => {
     setAddApiaryModalVisible(true)
   };
 
-  const closeAddApairyModal = () => {
+  const closeAddApiaryModal = () => {
     setAddApiaryModalVisible(false);
   };
 
-  const openEditModal = (apiary: Apiary) => {
+  const openEditApiaryModal = (apiary: Apiary) => {
     setSelectedApiary(apiary);
     setEditApiaryModalVisible(true);
   };
 
-  const closeEditApairyModal = () => {
-    setEditApiaryModalVisible(false);
+  const closeEditApiaryModal = () => {
     setSelectedApiary(null);
+    setEditApiaryModalVisible(false);
   };
-  return { expandedApiary, selectedApiary, addApiaryModalVisible, editApiaryModalVisible, setExpandedApiary, openAddModal, closeAddApairyModal, openEditModal, closeEditApairyModal };
+  return { 
+    expandedApiary, 
+    selectedApiary, 
+    addApiaryModalVisible, 
+    editApiaryModalVisible, 
+    setExpandedApiary, 
+    openAddApiaryModal, 
+    closeAddApiaryModal, 
+    openEditApiaryModal, 
+    closeEditApiaryModal 
+  };
 };

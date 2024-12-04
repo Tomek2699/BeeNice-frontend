@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import ApiaryService from '../../services/ApiaryService';
 import { Apiary } from '../../DataModels/ApiaryModel';
 
-export const useApiaries = () => {
+export const useData = () => {
   const [apiaries, setApiaries] = useState<Apiary[]>([]);
   const [filteredApiaries, setFilteredApiaries] = useState<Apiary[]>([]);
   const [isLoading, setIsLoading] = useState(true);

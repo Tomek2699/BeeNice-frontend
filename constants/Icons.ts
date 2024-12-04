@@ -18,6 +18,8 @@ const harvest = require("../assets/icons/harvest.png");
 const treatment = require("../assets/icons/treatment.png");
 const family = require("../assets/icons/family.png");
 const search = require("../assets/icons/search.png");
+const add = require("../assets/icons/add.png");
+const clear = require("../assets/icons/clear.png");
 
 export default {
   home,
@@ -40,4 +42,6 @@ export default {
   treatment,
   family,
   search,
+  add,
+  clear,
 };

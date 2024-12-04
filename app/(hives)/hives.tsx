@@ -1,106 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Alert, Image, Animated, LayoutAnimation, Button } from 'react-native';
-import HiveService from '../../services/HiveService'
-import { Hive } from '../../DataModels/HiveModel';
+import React from 'react';
+import { View, Text, TouchableOpacity, Image, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AddHiveModal from '../../ScreensComponents/Hives/AddHiveModal'
 import EditHiveModal from '@/ScreensComponents/Hives/EditHiveModal';
 import HiveRenderItem from '../../ScreensComponents/Hives/HiveRenderItem'
 import Icons from '@/constants/Icons';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import LoadingScreen from '@/Components/LoadingScreen';
 import CustomPageHeader from '@/Components/CustomPageHeader';
+import { useData } from '@/hooks/Hives/useData';
+import { useSearch } from '@/hooks/Hives/useSearch';
+import { useCrud } from '@/hooks/Hives/useCrud';
+import { useScreenActions } from '@/hooks/Hives/useScreenActions';
+import { useRouting } from '@/hooks/Hives/useRouting';
 
 const Hives = () => {
-  const router = useRouter();
   const params = useLocalSearchParams();
-  const [apiaryId, setApiaryId] = useState<number | undefined>();
-  const [hives, setHives] = useState<Hive[]>([]);
-  const [expandedHive, setExpandedHive] = useState(hives.length > 0 ? hives[0].id : null);
-  const [addHiveModalVisible, setNewHiveModalVisible] = useState(false);
-  const [editHiveModalVisible, setEditHiveModalVisible] = useState(false);
-  const [selectedHive, setSelectedHive] = useState<Hive | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleAddHive = (hive: Hive) => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setHives((prevHives) => [...prevHives, hive]);
-  };
-
-  const handleEditHive = (hive: Hive) => {
-    setHives((prevHives) => 
-      prevHives.map(item => item.id === hive.id ? hive : item)
-    );
-  };
-
-  const handleOnPressEditHive = (hive: Hive) => {
-    setSelectedHive(hive)
-    setEditHiveModalVisible(true)
-  };
-
-  const handleOpenDashboard = (hive: Hive) => {
-    const serializedData = JSON.stringify(hive);
-    router.push({
-      pathname: '/dashboard',
-      params: { hiveObject: serializedData },
-    });
-  };
-
-  const handleDelete = async (id: number) => {
-    Alert.alert(
-      'Usuń element',
-      'Czy na pewno chcesz usunąć ten element?',
-      [
-        { text: 'Anuluj', style: 'cancel' },
-        {
-          text: 'Usuń',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              const response = await HiveService.delete(id);
-              if (response.status === 200) {
-                LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-                setHives((hives) => hives.filter((item) => item.id !== id));
-              } else {
-                Alert.alert('Błąd', 'Nie udało się usunąć elementu. Spróbuj ponownie.');
-              }
-            } catch (error) {
-              console.error('Błąd usuwania elementu:', error);
-              Alert.alert('Błąd', 'Nie udało się usunąć elementu.');
-            }
-          },
-        },
-      ],
-    );
-  }
-
-  const getData = async (): Promise<void> => {
-    setIsLoading(true);
-    try {
-      const response = await HiveService.getItems(apiaryId);
-      if(response.status === 200){
-        const downloadedHives = response.hives;
-        setHives(downloadedHives);
-      }
-    } catch (error) {
-      Alert.alert('Błąd', 'Nie udało się pobrać danych.');
-    }
-    finally{
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (typeof params.apiaryId === 'string') {
-      setApiaryId(Number(params.apiaryId));
-    }
-  }, [params.apiaryId]);
-
-  useEffect(() => {
-    if (apiaryId !== undefined) {
-      getData();
-    }
-  }, [apiaryId]);
+  const { apiaryId, hives, filteredHives, setHives, setFilteredHives, isLoading } = useData({ params });
+  const { handleSearch } = useSearch({hives, setFilteredHives});
+  const { handleAddHive, handleEditHive, handleDeleteHive } = useCrud({setHives});
+  const { expandedHive, selectedHive, addHiveModalVisible, editHiveModalVisible, setExpandedHive, openAddHiveModal, closeAddHiveModal, 
+    openEditHiveModal, closeEditHiveModal } = useScreenActions({hives})
+  const { handleOpenDashboard } = useRouting();
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -111,25 +32,27 @@ const Hives = () => {
       <CustomPageHeader
               title="Ule"
               pageIcon={Icons.hiveColor}
+              onSearch={handleSearch}
       />
-      <View className="items-center mb-4">
+      <View className="self-center mb-4">
         <TouchableOpacity
-          className="self-center bg-mainButtonBg border-2 rounded-2xl p-4"
-          onPress={() => setNewHiveModalVisible(true)}
+          className="flex-row justify-center self-center bg-mainButtonBg border-2 rounded-2xl p-4"
+          onPress={openAddHiveModal}
         >
-          <Text className="font-pbold">Dodaj ul</Text>
+          <Text className="font-pbold mr-3">Dodaj ul</Text>
+          <Image source={Icons.add} className="w-6 h-6" resizeMode="contain" />
         </TouchableOpacity>
       </View>
       <Animated.FlatList
-        data={hives}
+        data={filteredHives}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <HiveRenderItem
             item={item}
             expandedHive={expandedHive}
             setExpandedHive={setExpandedHive}
-            handleOnPressEditHive={handleOnPressEditHive}
-            handleDelete={handleDelete}
+            handleOnPressEditHive={openEditHiveModal}
+            handleDelete={handleDeleteHive}
             handleOpenDashboard={handleOpenDashboard}
           />
         )}
@@ -138,13 +61,13 @@ const Hives = () => {
       <AddHiveModal
         visible={addHiveModalVisible}
         apiaryId={apiaryId}
-        onClose={() => setNewHiveModalVisible(false)}
+        onClose={closeAddHiveModal}
         onSave={handleAddHive}
       />
       <EditHiveModal
         visible={editHiveModalVisible}
         value={selectedHive}
-        onClose={() => setEditHiveModalVisible(false)}
+        onClose={closeEditHiveModal}
         onSave={handleEditHive}
       />
     </SafeAreaView>

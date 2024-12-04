@@ -3,7 +3,7 @@ import React from 'react'
 import CustomPageHeader from '@/Components/CustomPageHeader'
 import Icons from '@/constants/Icons'
 
-const treatments = () => {
+const Treatments = () => {
   return (
     <SafeAreaView className="bg-primaryBg h-full">
       <CustomPageHeader
@@ -49,4 +49,4 @@ const treatments = () => {
   )
 }
 
-export default treatments
+export default Treatments
