@@ -23,7 +23,7 @@ export default function Dashboard () {
           <TouchableOpacity
               onPress={handleOpenQueens}
               className="justify-center items-center bg-hiveBtn w-[49%] rounded-xl p-8 mb-4">
-              <Image source={Icons.mother} className="w-[100px] h-[60px] mb-3" resizeMode="contain" />
+              <Image source={Icons.queen} className="w-[100px] h-[60px] mb-3" resizeMode="contain" />
               <Text className="font-pmedium text-2xl">Matki</Text>
           </TouchableOpacity>
           <TouchableOpacity

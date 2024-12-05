@@ -24,7 +24,7 @@ export const useData = () => {
     setIsLoading(true)
     setTimeout(async () => {
       await getData();
-    }, 5000); 
+    }, 1000); 
   };
 
   useEffect(() => {

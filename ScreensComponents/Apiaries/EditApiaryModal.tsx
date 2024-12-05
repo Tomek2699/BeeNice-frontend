@@ -13,10 +13,7 @@ type MyComponentProps = {
 
 const EditApiaryModal: React.FC<MyComponentProps> = ({ visible, value, onClose, onSave }) => {
   const initialApiaryState = { name: '', location: '' };
-  const [apiary, setApiary] = useState({
-    name: '',
-    location: '',
-  })
+  const [apiary, setApiary] = useState(initialApiaryState)
 
   const handleSave = async (): Promise<void> => {
     if(value != null){
@@ -45,6 +42,7 @@ const EditApiaryModal: React.FC<MyComponentProps> = ({ visible, value, onClose, 
 
   useEffect(() => {
     if(value != null){
+      console.log(typeof value.creationDate)
         setApiary(value);
     }
     else{

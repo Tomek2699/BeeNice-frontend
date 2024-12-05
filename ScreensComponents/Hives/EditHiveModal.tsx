@@ -13,11 +13,7 @@ type MyComponentProps = {
 
 const EditHiveModal: React.FC<MyComponentProps> = ({ visible, value, onClose, onSave }) => {
   const initialHiveState = { hiveNumber: '', type: '', state: '' };
-  const [hive, setHive] = useState({
-    hiveNumber: '',
-    type: '',
-    state: '',
-  })
+  const [hive, setHive] = useState(initialHiveState)
 
   const handleSave = async (): Promise<void> => {
     if(value != null){

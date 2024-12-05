@@ -34,7 +34,7 @@ export const useData = ({params} : Props) => {
 
   useEffect(() => {
     const apiaryIdParam = params.apiaryId;
-    const id = Array.isArray(apiaryIdParam) ? apiaryIdParam[0] : apiaryIdParam; // Pobierz pierwszy element, jeśli tablica
+    const id = Array.isArray(apiaryIdParam) ? apiaryIdParam[0] : apiaryIdParam;
     const parsedId = Number(id);
 
     if (!isNaN(parsedId)) {

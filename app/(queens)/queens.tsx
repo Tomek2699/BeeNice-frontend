@@ -1,50 +1,71 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Animated } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity, Animated, Image } from 'react-native'
 import React from 'react'
 import CustomPageHeader from '@/Components/CustomPageHeader'
 import Icons from '@/constants/Icons'
+import { useLocalSearchParams } from 'expo-router'
+import LoadingScreen from '@/Components/LoadingScreen'
+import QueenRenderItem from '@/ScreensComponents/Queens/QueenRenderItem'
+import AddQueenModal from '@/ScreensComponents/Queens/AddQueenModal'
+import EditQueenModal from '@/ScreensComponents/Queens/EditQueenModal'
+import { useData } from '@/hooks/Queens/useData'
+import { useSearch } from '@/hooks/Queens/useSearch'
+import { useCrud } from '@/hooks/Queens/useCrud'
+import { useScreenActions } from '@/hooks/Queens/useScreenActions'
 
 const Queens = () => {
+  const params = useLocalSearchParams();
+  const { hiveId, queens, filteredQueens, setQueens, setFilteredQueens, isLoading } = useData({ params });
+  const { handleSearch } = useSearch({queens, setFilteredQueens});
+  const { handleAddQueen, handleEditQueen, handleDeleteQueen } = useCrud({setQueens});
+  const { expandedQueen, selectedQueen, addQueenModalVisible, editQueenModalVisible, setExpandedQueen, openAddQueenModal, closeAddQueenModal, 
+    openEditQueenModal, closeEditQueenModal } = useScreenActions({queens})
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+  
   return (
     <SafeAreaView className="bg-primaryBg h-full">
       <CustomPageHeader
               title="Matki"
-              pageIcon={Icons.mother}
+              pageIcon={Icons.queen}
+              onSearch={handleSearch}
       />
-      {/* <View className="items-center mb-4">
+      <View className="self-center mb-4">
         <TouchableOpacity
-          className="self-center bg-mainButtonBg border-2 rounded-2xl p-4"
-          onPress={() => setNewHiveModalVisible(true)}
+          className="flex-row justify-center self-center bg-mainButtonBg border-2 rounded-2xl p-4"
+          onPress={openAddQueenModal}
         >
-          <Text className="font-pbold">Dodaj ul</Text>
+          <Text className="font-pbold mr-3">Dodaj matkę</Text>
+          <Image source={Icons.add} className="w-6 h-6" resizeMode="contain" />
         </TouchableOpacity>
       </View>
       <Animated.FlatList
-        data={hives}
+        data={filteredQueens}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <HiveRenderItem
+          <QueenRenderItem
             item={item}
-            expandedHive={expandedHive}
-            setExpandedHive={setExpandedHive}
-            handleOnPressEditHive={handleOnPressEditHive}
-            handleDelete={handleDelete}
-            handleOpenDashboard={handleOpenDashboard}
+            expandedHive={expandedQueen}
+            setExpandedHive={setExpandedQueen}
+            handleOnPressEditHive={openEditQueenModal}
+            handleDelete={handleDeleteQueen}
           />
         )}
         contentContainerStyle={{ padding: 10 }}
       />
-      <AddHiveModal
-        visible={addHiveModalVisible}
-        apiaryId={apiaryId}
-        onClose={() => setNewHiveModalVisible(false)}
-        onSave={handleAddHive}
+      <AddQueenModal
+        visible={addQueenModalVisible}
+        hiveId={hiveId}
+        onClose={closeAddQueenModal}
+        onSave={handleAddQueen}
       />
-      <EditHiveModal
-        visible={editHiveModalVisible}
-        value={selectedHive}
-        onClose={() => setEditHiveModalVisible(false)}
-        onSave={handleEditHive}
-      /> */}
+      <EditQueenModal
+        visible={editQueenModalVisible}
+        value={selectedQueen}
+        onClose={closeEditQueenModal}
+        onSave={handleEditQueen}
+      />
     </SafeAreaView>
   )
 }

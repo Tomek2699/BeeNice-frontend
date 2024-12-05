@@ -48,6 +48,7 @@ class UserService{
   
   async validateToken() : Promise<AxiosResponse | undefined> {
     try {
+      
       const token = await ApiServiceInstance.getToken();
       if(token){
         const response = await ApiServiceInstance.sendRequest('post', '/Authorization/ValidateToken', {token})

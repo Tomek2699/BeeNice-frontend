@@ -13,7 +13,7 @@ const hiveColor = require("../assets/icons/hiveColor.png");
 const leftArrow = require("../assets/icons/left-arrow.png");
 const rightArrow = require("../assets/icons/right-arrow.png");
 const dashboard = require("../assets/icons/dashboard.png");
-const mother = require("../assets/icons/mother.png");
+const queen = require("../assets/icons/queen.png");
 const harvest = require("../assets/icons/harvest.png");
 const treatment = require("../assets/icons/treatment.png");
 const family = require("../assets/icons/family.png");
@@ -37,7 +37,7 @@ export default {
   leftArrow,
   rightArrow,
   dashboard,
-  mother,
+  queen,
   harvest,
   treatment,
   family,

@@ -25,7 +25,7 @@ class QueenService {
         id: item.id,
         queenNumber: item.queenNumber,
         race: item.race,
-        hatchDate: item.hatchDate,
+        hatchDate: new Date(item.hatchDate),
         state: item.state,
         hiveId: item.hiveId,
       }));
@@ -85,7 +85,7 @@ class QueenService {
         id: response.data.id,
         queenNumber: response.data.queenNumber,
         race: response.data.race,
-        hatchDate: response.data.hatchDate,
+        hatchDate: new Date(response.data.hatchDate),
         state: response.data.state,
         hiveId: response.data.hiveId
       }

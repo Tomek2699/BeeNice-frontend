@@ -12,10 +12,7 @@ type MyComponentProps = {
 
 const AddApiaryModal: React.FC<MyComponentProps> = ({ visible, onClose, onSave }) => {
   const initialApiaryState = { name: '', location: '' };
-  const [apiary, setApiary] = useState({
-    name: '',
-    location: '',
-  })
+  const [apiary, setApiary] = useState(initialApiaryState)
 
   const handleSave = async (): Promise<void> => {
     try {

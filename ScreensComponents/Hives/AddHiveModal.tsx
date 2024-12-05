@@ -13,11 +13,7 @@ type MyComponentProps = {
 
 const AddHiveModal: React.FC<MyComponentProps> = ({ visible, apiaryId, onClose, onSave }) => {
   const initialHiveState = { hiveNumber: '', type: '', state: '' };
-  const [hive, setHive] = useState({
-    hiveNumber: '',
-    type: '',
-    state: '',
-  })
+  const [hive, setHive] = useState(initialHiveState)
 
   const handleSave = async (): Promise<void> => {
     try {
