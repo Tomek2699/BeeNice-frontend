@@ -26,7 +26,7 @@ class QueenService {
         familyNumber: item.familyNumber,
         race: item.race,
         familyState: item.familyState,
-        creationDate: item.creationDate,
+        creationDate: new Date(item.creationDate),
         hiveId: item.hiveId,
       }));
       
@@ -58,7 +58,7 @@ class QueenService {
         familyNumber: response.data.familyNumber,
         race: response.data.race,
         familyState: response.data.familyState,
-        creationDate: response.data.creationDate,
+        creationDate: new Date(response.data.creationDate),
         hiveId: response.data.hiveId
       }
 
@@ -86,7 +86,7 @@ class QueenService {
         familyNumber: response.data.familyNumber,
         race: response.data.race,
         familyState: response.data.familyState,
-        creationDate: response.data.creationDate,
+        creationDate: new Date(response.data.creationDate),
         hiveId: response.data.hiveId
       }
 

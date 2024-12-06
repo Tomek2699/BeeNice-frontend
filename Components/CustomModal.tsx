@@ -1,9 +1,9 @@
-import { Modal, View, Text, TextInput, TouchableOpacity, Keyboard, Platform } from 'react-native';
+import { Modal, View, Text, TextInput, TouchableOpacity, Keyboard, Platform, ScrollView, KeyboardAvoidingView } from 'react-native';
 import React, { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import ShowDateHelper from '@/helpers/showDateHelper';
 
-interface MyComponentProps  {
+interface MyComponentProps {
   visible: boolean;
   title: string;
   acceptButton: string;
@@ -18,15 +18,15 @@ interface MyComponentProps  {
   onSubmit: () => void;
 };
 
-export default function CustomModal ({ visible, title, acceptButton, inputs, onClose, onSubmit }: MyComponentProps)  {
+export default function CustomModal({ visible, title, acceptButton, inputs, onClose, onSubmit }: MyComponentProps) {
   const [showDatePickerModal, setShowDatePickerModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [currentInputIndex, setCurrentInputIndex] = useState<number | null>(null);
+
   const openDatePickerModal = (index: number) => {
     setCurrentInputIndex(index);
-    
     const currentValue = inputs[index].value;
-    
+
     if (currentValue) {
       const parsedDate = new Date(currentValue);
       if (!isNaN(parsedDate.getTime())) {
@@ -55,50 +55,59 @@ export default function CustomModal ({ visible, title, acceptButton, inputs, onC
 
   return (
     <Modal visible={visible} animationType="fade" transparent={true}>
-      <View className='flex-1 justify-center items-center bg-zinc-900/60'>
-        <View className='w-[90%] p-20 bg-primaryBg border-2 rounded-xl items-center'>
-          <Text className='text-3xl font-bold mb-6'>{title}</Text>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{ flex: 1 }}
+      >
+        <View className='flex-1 justify-center items-center bg-zinc-900/60'>
+          <View className='w-[90%] p-6 bg-primaryBg border-2 rounded-xl'>
+            <Text className='text-3xl font-bold mb-6 text-center'>{title}</Text>
 
-          {inputs.map((input, index) => (
-            <View key={index} className="w-full justify-center items-center m-3">
-              <Text className="text-xl self-start text-black font-semibold">{input.title}</Text>
+            <ScrollView>
+              <View className='w-[90%]'>
+                {inputs.map((input, index) => (
+                  <View key={index} className="w-full justify-center items-center m-3">
+                    <Text className="text-xl self-start text-black font-semibold">{input.title}</Text>
 
-              {input.isDatePicker ? (
-                <TouchableOpacity
-                  onPress={() => openDatePickerModal(index)}
-                  className="w-full h-16 px-4 bg-fieldColor border-2 rounded-2xl justify-center"
-                >
-                  <Text className='color-black'>
-                    {input.value ? ShowDateHelper.formatDateToShowForString(input.value) : input.placeholder}
-                  </Text>
-                </TouchableOpacity>
-              ) : (
-                <TextInput
-                  className="w-full h-16 px-4 bg-fieldColor border-2 rounded-2xl items-center flex-row"
-                  placeholder={input.placeholder}
-                  placeholderTextColor="black"
-                  value={input.value}
-                  onChangeText={input.onChange}
-                  onSubmitEditing={Keyboard.dismiss}
-                />
-              )}
+                    {input.isDatePicker ? (
+                      <TouchableOpacity
+                        onPress={() => openDatePickerModal(index)}
+                        className="w-full h-16 px-4 bg-fieldColor border-2 rounded-2xl justify-center"
+                      >
+                        <Text className='color-black'>
+                          {input.value ? ShowDateHelper.formatDateToShowForString(input.value) : input.placeholder}
+                        </Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <TextInput
+                        className="w-full h-16 px-4 bg-fieldColor border-2 rounded-2xl items-center flex-row"
+                        placeholder={input.placeholder}
+                        placeholderTextColor="black"
+                        value={input.value}
+                        onChangeText={input.onChange}
+                        onSubmitEditing={Keyboard.dismiss}
+                      />
+                    )}
+                  </View>
+                ))}
+              </View>
+            </ScrollView>
+
+            <View className='flex-row items-center justify-center mt-4'>
+              <TouchableOpacity onPress={onSubmit}>
+                <Text className='font-pmedium text-xl mr-6'>
+                  {acceptButton}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={onClose}>
+                <Text className='font-pmedium text-xl'>
+                  Zamknij
+                </Text>
+              </TouchableOpacity>
             </View>
-          ))}
-
-          <View className='flex-row items-center justify-between'>
-            <TouchableOpacity onPress={onSubmit} className='p-2 mr-5'>
-              <Text className='font-pmedium text-xl'>
-                {acceptButton}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={onClose} className='p-2'>
-              <Text className='font-pmedium text-xl'>
-                Zamknij
-              </Text>
-            </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </KeyboardAvoidingView>
 
       {showDatePickerModal && (
         <Modal visible={showDatePickerModal} animationType="fade" transparent={true}>
@@ -112,7 +121,7 @@ export default function CustomModal ({ visible, title, acceptButton, inputs, onC
                 onChange={(event, date) => setSelectedDate(date || selectedDate)}
                 textColor='black'
               />
-              <View className="flex-row items-center justify-between">
+              <View className="flex-row items-center justify-between mt-4">
                 <TouchableOpacity
                   onPress={handleDateSave}
                   className="mr-6"

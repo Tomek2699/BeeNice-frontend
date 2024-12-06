@@ -57,7 +57,7 @@ class QueenService {
         id: response.data.id,
         queenNumber: response.data.queenNumber,
         race: response.data.race,
-        hatchDate: response.data.hatchDate,
+        hatchDate: new Date(response.data.hatchDate),
         state: response.data.state,
         hiveId: response.data.hiveId
       }

@@ -46,9 +46,9 @@ const Queens = () => {
         renderItem={({ item }) => (
           <QueenRenderItem
             item={item}
-            expandedHive={expandedQueen}
-            setExpandedHive={setExpandedQueen}
-            handleOnPressEditHive={openEditQueenModal}
+            expandedQueen={expandedQueen}
+            setExpandedQueen={setExpandedQueen}
+            handleOnPressEditQueen={openEditQueenModal}
             handleDelete={handleDeleteQueen}
           />
         )}

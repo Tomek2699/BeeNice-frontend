@@ -45,7 +45,6 @@ const EditQueenModal: React.FC<MyComponentProps> = ({ visible, value, onClose, o
 
   useEffect(() => {
     if(value != null){
-      console.log(typeof value.hatchDate)
         setQueen(value);
     }
     else{

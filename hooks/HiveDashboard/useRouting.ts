@@ -17,7 +17,7 @@ export const useRouting = ({hive} : Props) => {
 
   const handleOpenFamilies = () => {
     router.push({
-      pathname: '/families',
+      pathname: '/beeFamilies',
       params: { hiveId: hive?.id.toString() },
     });
   };

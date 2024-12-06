@@ -23,7 +23,7 @@ class QueenService {
       const response = await ApiServiceInstance.sendRequestWithAuth<HoneyCollection[]>('get', '/HoneyCollectionController/GetHoneyCollections', hiveId);
       const honeyCollections: HoneyCollection[] = response.data.map((item: any) => ({
         id: item.id,
-        collectionDate: item.collectionDate,
+        collectionDate: new Date(item.collectionDate),
         honeyQuantity: item.honeyQuantity,
         typeOfHoney: item.typeOfHoney,
         hiveId: item.hiveId,
@@ -44,7 +44,7 @@ class QueenService {
     }
   }
 
-  async save (collectionDate: Date, honeyQuantity: string, typeOfHoney: string, hiveId: number | undefined) : Promise<HoneyCollectionResponse> {
+  async save (collectionDate: Date, honeyQuantity: number, typeOfHoney: string, hiveId: number | undefined) : Promise<HoneyCollectionResponse> {
     try {
       if(hiveId === undefined){
         throw new Error('Brak hiveId');
@@ -54,7 +54,7 @@ class QueenService {
         honeyQuantity: honeyQuantity, typeOfHoney: typeOfHoney, hiveId: hiveId});
       const honeyCollection: HoneyCollection = {
         id: response.data.id,
-        collectionDate: response.data.collectionDate,
+        collectionDate: new Date(response.data.collectionDate),
         honeyQuantity: response.data.honeyQuantity,
         typeOfHoney: response.data.typeOfHoney,
         hiveId: response.data.hiveId
@@ -82,7 +82,7 @@ class QueenService {
         hiveId: editedHoneyCollection.hiveId});
       const honeyCollection: HoneyCollection = {
         id: response.data.id,
-        collectionDate: response.data.collectionDate,
+        collectionDate: new Date(response.data.collectionDate),
         honeyQuantity: response.data.honeyQuantity,
         typeOfHoney: response.data.typeOfHoney,
         hiveId: response.data.hiveId

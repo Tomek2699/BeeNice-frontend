@@ -3,7 +3,7 @@ import Icons from '../../constants/Icons'
 import CustomTabIcon from '@/Components/CustomTabIcon';
 import { Tabs } from 'expo-router'
 
-const FamiliesLayout = () => {
+const BeeFamiliesLayout = () => {
   return (
     <Tabs
       screenOptions={{
@@ -16,13 +16,13 @@ const FamiliesLayout = () => {
       }}
     >
       <Tabs.Screen
-        name="families"
+        name="beeFamilies"
         options={{
           title: 'Rodziny',
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
             <CustomTabIcon
-              icon={Icons.hive}
+              icon={Icons.family}
               color={color}
               focused={focused}
               name="Rodziny"
@@ -34,4 +34,4 @@ const FamiliesLayout = () => {
   )
 }
 
-export default FamiliesLayout
+export default BeeFamiliesLayout

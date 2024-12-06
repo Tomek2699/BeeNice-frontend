@@ -1,46 +1,46 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { Queen } from '../../DataModels/QueenModel';
+import { BeeFamily } from '../../DataModels/BeeFamilyMode';
 import Icons from '../../constants/Icons';
 import ShowDateHelper from '@/helpers/showDateHelper';
 
 interface RenderProps {
-  item: Queen;
-  expandedQueen: number | null;
-  setExpandedQueen: (id: number | null) => void;
-  handleOnPressEditQueen: (queen: Queen) => void;
+  item: BeeFamily;
+  expandedBeeFamily: number | null;
+  setExpandedBeeFamily: (id: number | null) => void;
+  handleOnPressEditBeeFamily: (beeFamily: BeeFamily) => void;
   handleDelete: (id: number) => void;
 }
 
-const QueenRenderItem: React.FC<RenderProps> = ({
+const BeeFamilyRenderItem: React.FC<RenderProps> = ({
   item,
-  expandedQueen,
-  setExpandedQueen,
-  handleOnPressEditQueen,
+  expandedBeeFamily,
+  setExpandedBeeFamily,
+  handleOnPressEditBeeFamily,
   handleDelete,
 }) => {
 
   return (
     <TouchableOpacity
       className={`border-2 rounded-2xl p-4 bg-tile ${
-        expandedQueen === item.id ? 'h-auto' : 'h-20'
+        expandedBeeFamily === item.id ? 'h-auto' : 'h-20'
       } mb-4`}
-      onPress={() => setExpandedQueen(expandedQueen === item.id ? null : item.id)}
+      onPress={() => setExpandedBeeFamily(expandedBeeFamily === item.id ? null : item.id)}
     >
-      {expandedQueen === item.id ? (
+      {expandedBeeFamily === item.id ? (
         <View>
           <Text className="font-pbold font-bold text-2xl mb-1" numberOfLines={1}>
-            {item.queenNumber}
+            {item.familyNumber}
           </Text>
           <View className="flex-row justify-between">
             <Text className="font-pmedium font-bold text-xl" numberOfLines={1}>
               {item.race}
             </Text>
             <Text className="font-pmedium font-bold text-xl" numberOfLines={1}>
-              {ShowDateHelper.formatDateToShowForDate(item.hatchDate)}
+              {item.familyState}
             </Text>
             <Text className="font-pmedium font-bold text-xl" numberOfLines={1}>
-              {item.state}
+              {ShowDateHelper.formatDateToShowForDate(item.creationDate)}
             </Text>
           </View>
 
@@ -49,7 +49,7 @@ const QueenRenderItem: React.FC<RenderProps> = ({
           <View className="flex-row justify-between">
             <TouchableOpacity
               className="flex-row justify-center bg-edit w-[33%] rounded-xl p-3"
-              onPress={() => handleOnPressEditQueen(item)}
+              onPress={() => handleOnPressEditBeeFamily(item)}
             >
               <Text className="font-pmedium text-xm mr-3">Edytuj</Text>
               <Image source={Icons.edit} className="w-6 h-6" resizeMode="contain" />
@@ -66,12 +66,12 @@ const QueenRenderItem: React.FC<RenderProps> = ({
       ) : (
         <View className="flex-row justify-between items-center">
           <Text className="font-psemibold text-xl" numberOfLines={1}>
-            {item.queenNumber}
+            {item.familyNumber}
           </Text>
           <View className="flex-row">
             <TouchableOpacity
               className="bg-edit rounded-xl p-3 mr-2"
-              onPress={() => handleOnPressEditQueen(item)}
+              onPress={() => handleOnPressEditBeeFamily(item)}
             >
               <Image source={Icons.edit} className="w-6 h-6" resizeMode="contain" />
             </TouchableOpacity>
@@ -88,4 +88,4 @@ const QueenRenderItem: React.FC<RenderProps> = ({
   );
 };
 
-export default QueenRenderItem;
+export default BeeFamilyRenderItem;
