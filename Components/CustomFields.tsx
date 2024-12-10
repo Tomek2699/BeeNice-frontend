@@ -2,11 +2,9 @@ import { Modal, View, Text, TextInput, TouchableOpacity, Keyboard, Platform, Scr
 import React, { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import ShowDateHelper from '@/helpers/showDateHelper';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 interface MyComponentProps {
-  visible: boolean;
-  title: string;
-  acceptButton: string;
   inputs: { 
     title: string, 
     placeholder: string; 
@@ -14,11 +12,9 @@ interface MyComponentProps {
     onChange: (text: string) => void;
     isDatePicker?: boolean;
   }[];
-  onClose: () => void;
-  onSubmit: () => void;
 };
 
-export default function CustomModal({ visible, title, acceptButton, inputs, onClose, onSubmit }: MyComponentProps) {
+export default function CustomModal({ inputs }: MyComponentProps) {
   const [showDatePickerModal, setShowDatePickerModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [currentInputIndex, setCurrentInputIndex] = useState<number | null>(null);
@@ -54,21 +50,16 @@ export default function CustomModal({ visible, title, acceptButton, inputs, onCl
   };
 
   return (
-    <Modal visible={visible} animationType="fade" transparent={true}>
-      <KeyboardAvoidingView 
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{ flex: 1 }}
-      >
-        <View className='flex-1 justify-center items-center bg-zinc-900/60'>
-          <View className='w-[90%] max-h-[80%] p-6 bg-primaryBg border-2 rounded-xl'>
-            <Text className='text-3xl font-bold mb-6 text-center'>{title}</Text>
-
-            <ScrollView>
-              <View className='w-[90%]'>
-                {inputs.map((input, index) => (
+    <View className='flex-1'>
+        <KeyboardAwareScrollView
+            style={{ flex: 1 }}
+            resetScrollToCoords={{ x: 0, y: 0 }}
+            contentContainerStyle={{ flexGrow: 1 }}
+            scrollEnabled={true}
+        >
+            {inputs.map((input, index) => (
                   <View key={index} className="w-full justify-center items-center m-3">
-                    <Text className="text-xl self-start text-black font-semibold">{input.title}</Text>
-
+                    <Text className="text-xl self-start text-black font-semibold">{input.title}</Text>  
                     {input.isDatePicker ? (
                       <TouchableOpacity
                         onPress={() => openDatePickerModal(index)}
@@ -88,28 +79,11 @@ export default function CustomModal({ visible, title, acceptButton, inputs, onCl
                         onSubmitEditing={Keyboard.dismiss}
                       />
                     )}
-                  </View>
-                ))}
-              </View>
-            </ScrollView>
+                </View>
+            ))}
+        </KeyboardAwareScrollView>
 
-            <View className='flex-row items-center justify-center mt-4'>
-              <TouchableOpacity onPress={onSubmit}>
-                <Text className='font-pmedium text-xl mr-6'>
-                  {acceptButton}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={onClose}>
-                <Text className='font-pmedium text-xl'>
-                  Zamknij
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </KeyboardAvoidingView>
-
-      {showDatePickerModal && (
+        {showDatePickerModal && (
         <Modal visible={showDatePickerModal} animationType="fade" transparent={true}>
           <View className="flex-1 justify-center items-center bg-zinc-900/60">
             <View className="w-[90%] p-6 bg-primaryBg rounded-xl items-center">
@@ -138,7 +112,6 @@ export default function CustomModal({ visible, title, acceptButton, inputs, onCl
           </View>
         </Modal>
       )}
-    </Modal>
+    </View>
   );
 };
-

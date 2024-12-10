@@ -3,7 +3,7 @@ import Icons from '../../constants/Icons'
 import CustomTabIcon from '@/Components/CustomTabIcon';
 import { Tabs } from 'expo-router'
 
-const QueensLayout = () => {
+const TreatmentsLayout = () => {
   return (
     <Tabs
       screenOptions={{
@@ -16,16 +16,16 @@ const QueensLayout = () => {
       }}
     >
       <Tabs.Screen
-        name="queens"
+        name="therapeuticTreatment"
         options={{
-          title: 'Matki',
+          title: 'Zabiegi',
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
             <CustomTabIcon
-              icon={Icons.queen}
+              icon={Icons.treatment}
               color={color}
               focused={focused}
-              name="Matki"
+              name="Zabiegi"
             />
           )
         }}
@@ -34,4 +34,4 @@ const QueensLayout = () => {
   )
 }
 
-export default QueensLayout
+export default TreatmentsLayout

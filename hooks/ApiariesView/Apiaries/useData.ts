@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import ApiaryService from '../../services/ApiaryService';
-import { Apiary } from '../../DataModels/ApiaryModel';
+import ApiaryService from '../../../services/ApiaryService';
+import { Apiary } from '../../../DataModels/ApiaryModel';
 
 export const useData = () => {
   const [apiaries, setApiaries] = useState<Apiary[]>([]);

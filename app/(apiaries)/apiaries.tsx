@@ -6,11 +6,11 @@ import ApiaryRenderItem from '../../ScreensComponents/Apiaries/ApiaryRenderItem'
 import Icons from '@/constants/Icons';
 import LoadingScreen from '@/Components/LoadingScreen';
 import CustomPageHeader from '../../Components/CustomPageHeader'
-import { useData } from '@/hooks/Apiaries/useData';
-import { useSearch } from '@/hooks/Apiaries/useSearch';
-import { useCrud } from '@/hooks/Apiaries/useCrud';
-import { useScreenActions } from '@/hooks/Apiaries/useScreenActions';
-import { useRouting } from '@/hooks/Apiaries/useRouting';
+import { useData } from '@/hooks/ApiariesView/Apiaries/useData';
+import { useSearch } from '@/hooks/ApiariesView/Apiaries/useSearch';
+import { useCrud } from '@/hooks/ApiariesView/Apiaries/useCrud';
+import { useScreenActions } from '@/hooks/ApiariesView/Apiaries/useScreenActions';
+import { useRouting } from '@/hooks/ApiariesView/Apiaries/useRouting';
 
 const Apiaries = () => {
   const { apiaries, filteredApiaries, setApiaries, setFilteredApiaries, isLoading } = useData();
@@ -49,7 +49,7 @@ const Apiaries = () => {
             item={item}
             expandedApiary={expandedApiary}
             setExpandedApiary={setExpandedApiary}
-            handleOnPressEditApiary={openEditApiaryModal}
+            handleOnPressEditApiary={() => openEditApiaryModal(item)}
             handleDelete={handleDeleteApiary}
             handleOpenHives={() => handleOpenHives(item.id)}
           />

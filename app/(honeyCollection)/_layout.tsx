@@ -22,7 +22,7 @@ const HarvestsLayout = () => {
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
             <CustomTabIcon
-              icon={Icons.hive}
+              icon={Icons.harvest}
               color={color}
               focused={focused}
               name="Zbiory"

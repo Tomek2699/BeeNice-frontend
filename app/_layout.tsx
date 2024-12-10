@@ -69,7 +69,8 @@ export default function RootLayout() {
       <Stack.Screen name="(queens)" options={{headerShown: false}}/>
       <Stack.Screen name="(beeFamilies)" options={{headerShown: false}}/>
       <Stack.Screen name="(honeyCollection)" options={{headerShown: false}}/>
-      <Stack.Screen name="(treatments)" options={{headerShown: false}}/>
+      <Stack.Screen name="(reviews)" options={{headerShown: false}}/>
+      <Stack.Screen name="(therapeuticTreatments)" options={{headerShown: false}}/>
     </Stack>
   );
 }

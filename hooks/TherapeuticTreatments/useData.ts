@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Queen } from '@/DataModels/QueenModel';
-import QueenService from '@/services/QueenService';
+import { TherapeuticTreatment } from '@/DataModels/TherapeuticTreatmentModel';
+import TherapeuticTreatmentService from '@/services/TherapeuticTreatmentService';
 import { Alert } from 'react-native';
 
 interface Props {
@@ -12,17 +12,17 @@ interface Props {
 
 export const useData = ({params} : Props) => {
   const [hiveId, setHiveId] = useState<number | undefined>();
-  const [queens, setQueens] = useState<Queen[]>([]);
-  const [filteredQueens, setFilteredQueens] = useState<Queen[]>([]);
+  const [therapeuticTreatments, setTherapeuticTreatments] = useState<TherapeuticTreatment[]>([]);
+  const [filteredTherapeuticTreatments, setFilteredTherapeuticTreatments] = useState<TherapeuticTreatment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const getData = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await QueenService.getItems(hiveId);
+      const response = await TherapeuticTreatmentService.getItems(hiveId);
       if(response.status === 200){
-        const downloadedQueens = response.queens;
-        setQueens(downloadedQueens);
+        const downloadedTherapeuticTreatments = response.therapeuticTreatments;
+        setTherapeuticTreatments(downloadedTherapeuticTreatments);
       }
     } catch (error) {
       Alert.alert('Błąd', 'Nie udało się pobrać danych.');
@@ -52,10 +52,10 @@ export const useData = ({params} : Props) => {
 
   return {
     hiveId,
-    queens,
-    filteredQueens,
-    setQueens,
-    setFilteredQueens,
+    therapeuticTreatments,
+    filteredTherapeuticTreatments,
+    setTherapeuticTreatments,
+    setFilteredTherapeuticTreatments,
     isLoading,
   };
 };

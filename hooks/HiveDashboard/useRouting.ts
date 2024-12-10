@@ -29,9 +29,16 @@ export const useRouting = ({hive} : Props) => {
     });
   };
 
+  const handleOpenReviews = () => {
+    router.push({
+      pathname: '/review',
+      params: { hiveId: hive?.id.toString() },
+    });
+  };
+
   const handleOpenTreatments = () => {
     router.push({
-      pathname: '/treatments',
+      pathname: '/therapeuticTreatment',
       params: { hiveId: hive?.id.toString() },
     });
   };
@@ -40,6 +47,7 @@ export const useRouting = ({hive} : Props) => {
     handleOpenQueens,
     handleOpenFamilies,
     handleOpenHarvests,
+    handleOpenReviews,
     handleOpenTreatments,
   };
 };

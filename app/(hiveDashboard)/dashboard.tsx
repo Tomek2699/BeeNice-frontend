@@ -9,16 +9,16 @@ import { useRouting } from '@/hooks/HiveDashboard/useRouting';
 export default function Dashboard () {
   const params = useLocalSearchParams();
   const { hive } = useData({ params });
-  const { handleOpenQueens, handleOpenFamilies, handleOpenHarvests, handleOpenTreatments, } = useRouting({hive});
+  const { handleOpenQueens, handleOpenFamilies, handleOpenHarvests, handleOpenReviews, handleOpenTreatments, } = useRouting({hive});
 
   return (
     <SafeAreaView className='bg-primaryBg h-full'>
-      <ScrollView>
-        <CustomPageHeader
+      <CustomPageHeader
                 title={`Panel ula - ${hive?.hiveNumber}`}
                 pageIcon={Icons.dashboard}
                 visibleSearch={false}
         />
+      <ScrollView>
         <View className='flex-row flex-wrap justify-between p-4'>
           <TouchableOpacity
               onPress={handleOpenQueens}
@@ -37,6 +37,12 @@ export default function Dashboard () {
               className="justify-center items-center bg-hiveBtn w-[49%] rounded-xl p-8 mb-4">
               <Image source={Icons.harvest} className="w-[120px] h-[60px] mb-3" resizeMode="contain" />
               <Text className="font-pmedium text-2xl">Zbiory</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+              onPress={handleOpenReviews}
+              className="justify-center items-center bg-hiveBtn w-[49%] rounded-xl p-8 mb-4">
+              <Image source={Icons.review} className="w-[120px] h-[60px] mb-3" resizeMode="contain" />
+              <Text className="font-pmedium text-2xl">Przeglądy</Text>
           </TouchableOpacity>
           <TouchableOpacity
               onPress={handleOpenTreatments}

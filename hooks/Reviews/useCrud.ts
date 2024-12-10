@@ -1,26 +1,26 @@
 import { Dispatch, SetStateAction } from 'react';
-import { Queen } from '@/DataModels/QueenModel';
+import { Review } from '@/DataModels/ReviewModel';
 import { Alert, LayoutAnimation  } from 'react-native';
-import QueenService from '@/services/QueenService';
+import ReviewService from '@/services/ReviewService';
 
 export interface Props {
-    setQueens: Dispatch<SetStateAction<Queen[]>>;
+  setReviews: Dispatch<SetStateAction<Review[]>>;
 }
 
-export const useCrud = ({ setQueens } : Props) => {
+export const useCrud = ({ setReviews } : Props) => {
 
-  const handleAddQueen = (queen: Queen) => {
+  const handleAddReview = (review: Review) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setQueens((prevQueens) => [...prevQueens, queen]);
+    setReviews((prevReviews) => [...prevReviews, review]);
   };
 
-  const handleEditQueen = (queen: Queen) => {
-    setQueens((prevQueens) => 
-      prevQueens.map(item => item.id === queen.id ? queen : item)
+  const handleEditReview = (review: Review) => {
+    setReviews((prevReviews) => 
+      prevReviews.map(item => item.id === review.id ? review : item)
     );
   };
 
-  const handleDeleteQueen = async (id: number) => {
+  const handleDeleteReview = async (id: number) => {
     Alert.alert(
       'Usuń element',
       'Czy na pewno chcesz usunąć ten element?',
@@ -31,10 +31,10 @@ export const useCrud = ({ setQueens } : Props) => {
           style: 'destructive',
           onPress: async () => {
             try {
-              const response = await QueenService.delete(id);
+              const response = await ReviewService.delete(id);
               if (response.status === 200) {
                 LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-                setQueens((queens) => queens.filter((item) => item.id !== id));
+                setReviews((reviews) => reviews.filter((item) => item.id !== id));
               } else {
                 Alert.alert('Błąd', 'Nie udało się usunąć elementu. Spróbuj ponownie.');
               }
@@ -49,8 +49,8 @@ export const useCrud = ({ setQueens } : Props) => {
   }
 
   return {
-    handleAddQueen,
-    handleEditQueen,
-    handleDeleteQueen,
+    handleAddReview,
+    handleEditReview,
+    handleDeleteReview,
   };
 };

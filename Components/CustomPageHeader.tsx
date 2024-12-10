@@ -8,11 +8,13 @@ interface Props {
     title: string;
     visibleSettings?: boolean;
     visibleBack?: boolean;
+    onBack?: () => void;
     visibleSearch?: boolean;
     onSearch?: (query: string) => void;
   }
 
-export default function CustomPageHeader ({ title, pageIcon, visibleSettings = true, visibleBack = true, visibleSearch = true, onSearch = () => {} } : Props) {
+export default function CustomPageHeader ({ title, pageIcon, visibleSettings = true, visibleBack = true, onBack,
+    visibleSearch = true, onSearch = () => {} } : Props) {
   const [isSearchVisible, setSearchVisible] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
@@ -27,13 +29,21 @@ export default function CustomPageHeader ({ title, pageIcon, visibleSettings = t
     }
   };
 
+  const handleGoBack = () => {
+    if (onBack) {
+      onBack();
+    } else if (router.canGoBack()) {
+      router.back();
+    }
+  }
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View className='flex flex-none mb-4 pt-2 px-8'>
         <View className='flex-row justify-between mb-2'>
           <View className='flex-1 items-start self-start'>
             {visibleBack && (
-              <TouchableOpacity onPress={router.canGoBack() ? router.back : undefined}>
+              <TouchableOpacity onPress={handleGoBack}>
                 <Image source={Icons.leftArrow} 
                   resizeMode="contain"
                   className="w-[70px] h-[60px]"/>

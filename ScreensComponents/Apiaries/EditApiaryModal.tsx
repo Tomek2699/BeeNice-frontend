@@ -42,7 +42,6 @@ const EditApiaryModal: React.FC<MyComponentProps> = ({ visible, value, onClose, 
 
   useEffect(() => {
     if(value != null){
-      console.log(typeof value.creationDate)
         setApiary(value);
     }
     else{
