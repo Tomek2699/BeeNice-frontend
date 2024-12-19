@@ -1,16 +1,20 @@
-// import { Queen } from '@/DataModels/QueenModel';
+// import { HoneyCollection } from '@/DataModels/HoneyCollectionModel';
 // import { useRouter } from 'expo-router';
 
-// export const useRouting = () => {
+// interface Props {
+//     honeyCollections: HoneyCollection[]
+//   }
+
+// export const useRouting = ({honeyCollections} : Props) => {
 //   const router = useRouter();
 
-//   const handleOpenDashboard = (queen: Queen) => {
-//     const serializedData = JSON.stringify(queen);
+//   const handleOpenHoneyCollectionStatistics = () => {
+//     const serializedData = JSON.stringify(honeyCollections);
 //     router.push({
-//       pathname: '/dashboard',
-//       params: { queenObject: serializedData },
+//       pathname: '/honeyCollection',
+//       params: { serializedData },
 //     });
 //   };
 
-//   return { handleOpenDashboard };
+//   return { handleOpenHoneyCollectionStatistics };
 // };

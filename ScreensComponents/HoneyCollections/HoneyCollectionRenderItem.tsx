@@ -22,7 +22,7 @@ const HoneyCollectionRenderItem: React.FC<RenderProps> = ({
 
   return (
     <TouchableOpacity
-      className={`border-2 rounded-2xl p-4 bg-tile ${
+      className={`border-2 rounded-2xl p-4 bg-tile shadow ${
         expandedHoneyCollection === item.id ? 'h-auto' : 'h-20'
       } mb-4`}
       onPress={() => setExpandedHoneyCollection(expandedHoneyCollection === item.id ? null : item.id)}

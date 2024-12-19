@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { HoneyCollection } from '@/DataModels/HoneyCollectionModel';
 import HoneyCollectionService from '@/services/HoneyCollectionService';
 import { Alert } from 'react-native';
@@ -8,11 +8,12 @@ interface Props {
     hiveId?: string | string[];
     [key: string]: unknown;
   };
+  setHoneyCollections: Dispatch<SetStateAction<HoneyCollection[]>>;
 }
 
-export const useData = ({params} : Props) => {
+export const useData = ({params, setHoneyCollections} : Props) => {
   const [hiveId, setHiveId] = useState<number | undefined>();
-  const [honeyCollections, setHoneyCollections] = useState<HoneyCollection[]>([]);
+  //const [honeyCollections, setHoneyCollections] = useState<HoneyCollection[]>([]);
   const [filteredHoneyCollections, setFilteredHoneyCollections] = useState<HoneyCollection[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -52,9 +53,7 @@ export const useData = ({params} : Props) => {
 
   return {
     hiveId,
-    honeyCollections,
     filteredHoneyCollections,
-    setHoneyCollections,
     setFilteredHoneyCollections,
     isLoading,
   };

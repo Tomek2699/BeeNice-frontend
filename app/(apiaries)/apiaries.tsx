@@ -11,6 +11,7 @@ import { useSearch } from '@/hooks/ApiariesView/Apiaries/useSearch';
 import { useCrud } from '@/hooks/ApiariesView/Apiaries/useCrud';
 import { useScreenActions } from '@/hooks/ApiariesView/Apiaries/useScreenActions';
 import { useRouting } from '@/hooks/ApiariesView/Apiaries/useRouting';
+import ApiaryMapModal from '@/ScreensComponents/Apiaries/ApiaryMapModal';
 
 const Apiaries = () => {
   const { apiaries, filteredApiaries, setApiaries, setFilteredApiaries, isLoading } = useData();
@@ -67,6 +68,7 @@ const Apiaries = () => {
         onClose={closeEditApiaryModal}
         onSave={handleEditApiary}
       />
+
     </SafeAreaView>
   );
 };

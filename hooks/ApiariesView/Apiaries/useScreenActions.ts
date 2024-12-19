@@ -28,6 +28,7 @@ export const useScreenActions = ({ apiaries } : Props) => {
     setSelectedApiary(null);
     setEditApiaryModalVisible(false);
   };
+
   return { 
     expandedApiary, 
     selectedApiary, 
@@ -37,6 +38,6 @@ export const useScreenActions = ({ apiaries } : Props) => {
     openAddApiaryModal, 
     closeAddApiaryModal, 
     openEditApiaryModal, 
-    closeEditApiaryModal 
+    closeEditApiaryModal
   };
 };

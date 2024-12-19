@@ -21,6 +21,9 @@ const review = require("../assets/icons/review.png");
 const search = require("../assets/icons/search.png");
 const add = require("../assets/icons/add.png");
 const clear = require("../assets/icons/clear.png");
+const barChart = require("../assets/icons/barChart.png");
+const pdf = require("../assets/icons/pdf.png");
+const map = require("../assets/icons/map.png");
 
 export default {
   home,
@@ -46,4 +49,7 @@ export default {
   search,
   add,
   clear,
+  barChart,
+  pdf,
+  map,
 };

@@ -11,10 +11,12 @@ import { useScreenActions } from '@/hooks/HoneyCollections/useScreenActions'
 import HoneyCollectionRenderItem from '@/ScreensComponents/HoneyCollections/HoneyCollectionRenderItem'
 import AddHoneyCollectionModal from '@/ScreensComponents/HoneyCollections/AddHoneyCollectionModal'
 import EditHoneyCollectionModal from '@/ScreensComponents/HoneyCollections/EditHoneyCollectionModal'
+import { useHoneyCollections } from '@/DataProviders/HoneyCollectionsProvider'
 
 const HoneyCollection = () => {
   const params = useLocalSearchParams();
-  const { hiveId, honeyCollections, filteredHoneyCollections, setHoneyCollections, setFilteredHoneyCollections, isLoading } = useData({ params });
+  const { honeyCollections, setHoneyCollections } = useHoneyCollections();
+  const { hiveId, filteredHoneyCollections, setFilteredHoneyCollections, isLoading } = useData({ params, setHoneyCollections });
   const { handleSearch } = useSearch({honeyCollections, setFilteredHoneyCollections});
   const { handleAddHoneyCollection, handleEditHoneyCollection, handleDeleteHoneyCollection } = useCrud({setHoneyCollections});
   const { expandedHoneyCollection, selectedHoneyCollection, addHoneyCollectionModalVisible, editHoneyCollectionModalVisible, setExpandedHoneyCollection, 

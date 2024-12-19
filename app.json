@@ -13,6 +13,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#D8A31A"
     },
+    "permissions": [
+      "location"
+    ],
     "ios": {
       "supportsTablet": true
     },
