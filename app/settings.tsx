@@ -22,11 +22,14 @@ const Settings = () => {
                 visibleSearch={false}
         />
 
-        <View className="flex-row justify-center p-10">
-          <TouchableOpacity className="flex-row justify-center items-center bg-mainButtonBg rounded-xl p-3"
+        <View className="flex-1 justify-center p-10">
+          <TouchableOpacity className="flex-row justify-center items-center bg-mainButtonBg rounded-xl p-3 mb-2"
             onPress={handleLogout}>
             <Text className='font-pmedium text-3xl mr-3'>Wyloguj</Text>
             <Image source={Icons.logout} className="w-8 h-8" resizeMode="contain" />
+          </TouchableOpacity>
+          <TouchableOpacity className="flex-row justify-center items-center bg-mainButtonBg rounded-xl p-3">
+            <Text className='font-pmedium text-3xl mr-3'>Zmiana hasła</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

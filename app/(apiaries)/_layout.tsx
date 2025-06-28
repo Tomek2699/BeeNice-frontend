@@ -25,7 +25,22 @@ const TabsLayout = () => {
               icon={Icons.apiary}
               color={color}
               focused={focused}
-              name="Apiaries"
+              name="Pasieki"
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="newApiary"
+        options={{
+          title: 'Nowa pasieka',
+          headerShown: false,
+          tabBarIcon: ({ focused, color }) => (
+            <CustomTabIcon
+              icon={Icons.add}
+              color={color}
+              focused={focused}
+              name="Dodaj"
             />
           ),
         }}

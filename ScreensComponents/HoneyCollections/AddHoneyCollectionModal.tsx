@@ -52,7 +52,13 @@ const AddHoneyCollectionModal: React.FC<MyComponentProps> = ({ visible, hiveId, 
           title: 'Ilość',
           placeholder: 'Wpisz ilość',
           value: honeyCollection.honeyQuantity.toString(),
-          onChange: (e) => setHoneyCollection({ ...honeyCollection, honeyQuantity: parseInt(e)}),
+          onChange: (e) => {
+            const value = e.trim();  // Usuwamy zbędne spacje
+            setHoneyCollection({ 
+              ...honeyCollection, 
+              honeyQuantity: value ? parseInt(value) : 0  // Jeśli pole jest puste, ustawiamy 0
+            });
+          },
         },
         {
           title: 'Rodzaj',

@@ -11,7 +11,7 @@ class ApiService {
   
   constructor() {
     this.ApiServiceInstance = axios.create({
-      baseURL: 'http://192.168.1.167:5000/api',
+      baseURL: 'http://51.68.139.55:5000/api',
       timeout: 30000,
     });
   }
